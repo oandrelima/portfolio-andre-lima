@@ -83,7 +83,6 @@ function ChannelCard({
           {name}
         </span>
         <span className="text-neutral-400 text-xs truncate max-w-full">{handle}</span>
-        <span className="text-amber-400 text-xs font-semibold mt-0.5">{subscribers}</span>
       </div>
     </a>
   );
