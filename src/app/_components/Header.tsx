@@ -26,17 +26,18 @@ export function Header() {
             : "py-6 bg-transparent border-b border-transparent"
         }`}
       >
-        {/* Brand Logo */}
-        <Link href="/" className="group flex items-center gap-3">
-          <div className="relative w-8 h-8 flex items-center justify-center bg-white text-black font-black text-xs tracking-tighter rounded-sm transition-transform duration-300 group-hover:rotate-180">
-            AL
-          </div>
-          <div className="flex flex-col text-left leading-none">
-            <span className="font-bold text-sm tracking-wider text-white uppercase">
-              André Lima&apos;s Portfolio
-            </span>
-          </div>
-        </Link>
+        {/* Brand Text */}
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (menuOpen) setMenuOpen(false);
+          }}
+          className="group flex flex-col text-left leading-none cursor-pointer"
+        >
+          <span className="font-bold text-sm tracking-wider text-white uppercase group-hover:text-red-500 transition-colors">
+            André Lima&apos;s Portfolio
+          </span>
+        </button>
 
         {/* Right Menu Controls */}
         <div className="flex items-center gap-4">
