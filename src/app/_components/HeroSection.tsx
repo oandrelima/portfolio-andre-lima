@@ -134,7 +134,6 @@ export function HeroSection() {
           </a>
 
           <div className="hidden sm:flex items-center gap-8">
-            <span>SCROLL PARA DESCOBRIR</span>
             <span className="text-white font-semibold">
               0{currentIndex + 1} / 0{HERO_PHOTOS.length}
             </span>

@@ -10,7 +10,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 px-6 py-5 md:px-12 flex items-center justify-between mix-blend-difference pointer-events-auto">
+      <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 md:px-12 flex items-center justify-between bg-black/60 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
         {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-3">
           <div className="relative w-8 h-8 flex items-center justify-center bg-white text-black font-black text-xs tracking-tighter rounded-sm transition-transform duration-300 group-hover:rotate-180">
