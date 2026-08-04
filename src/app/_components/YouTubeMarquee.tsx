@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Youtube } from "lucide-react";
+import { motion } from "framer-motion";
 import { trpc } from "~/utils/trpc";
 
 // Gradient colors per channel for avatar background fallback
@@ -47,7 +48,7 @@ function AvatarCircle({ id, name }: { id: string; name: string }) {
       alt={name}
       width={96}
       height={96}
-      className="w-24 h-24 rounded-full object-cover shadow-lg"
+      className="w-24 h-24 rounded-full object-cover shadow-lg group-hover:scale-105 transition-transform duration-300"
       onError={() => setImgError(true)}
     />
   );
@@ -72,7 +73,7 @@ function ChannelCard({
       data-cursor="YOUTUBE"
     >
       {/* Circular Avatar */}
-      <div className="rounded-full overflow-hidden border-2 border-white/10 group-hover:border-red-500/70 transition-all duration-300 group-hover:scale-105 shadow-lg">
+      <div className="rounded-full overflow-hidden border-2 border-white/10 group-hover:border-red-500/70 transition-all duration-300 group-hover:scale-105 shadow-xl group-hover:shadow-[0_0_30px_rgba(226,36,39,0.2)]">
         <AvatarCircle id={id} name={name} />
       </div>
 
@@ -113,7 +114,13 @@ export function YouTubeMarquee() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Section Header */}
-      <div className="px-6 md:px-12 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="px-6 md:px-12 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6"
+      >
         <div>
           <div className="flex items-center gap-2 text-xs text-red-500 uppercase tracking-widest mb-2">
             <Youtube className="w-4 h-4 text-red-500" />
@@ -125,13 +132,13 @@ export function YouTubeMarquee() {
         </div>
 
         <p className="max-w-md text-xs text-neutral-400 leading-relaxed">
-          Alguns dos maiores criadores e pro players de Fortnite do Brasil que contam com meu trabalho em capas e thumbnails.
+          Parcerias com os maiores criadores e pro players do Brasil.
         </p>
-      </div>
+      </motion.div>
 
       {/* INFINITE MARQUEE TICKER */}
-      <div className="relative w-full overflow-hidden py-10 marquee-mask">
-        <div className="flex items-start w-max animate-marquee-infinite hover:[animation-play-state:paused] cursor-pointer">
+      <div className="relative w-full overflow-hidden py-6 marquee-mask">
+        <div className="flex items-start w-max animate-marquee-slow hover:[animation-play-state:paused] cursor-pointer">
           {marqueeList.map((channel, index) => (
             <ChannelCard
               key={`${channel.id}-${index}`}

@@ -28,13 +28,13 @@ export function HeroSection() {
 
       {/* ── FULLSCREEN BACKGROUND PHOTOS ── */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, scale: 1.04 }}
+            initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1.0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${HERO_PHOTOS[currentIndex]})`,
@@ -43,9 +43,9 @@ export function HeroSection() {
         </AnimatePresence>
 
         {/* Subtle dark vignette top and bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70" />
 
-        {/* ── LEFT FADE: solid black on left (covering text area) → transparent ── */}
+        {/* ── LEFT FADE: solid black on left → transparent ── */}
         <div
           className="absolute inset-0"
           style={{
@@ -76,9 +76,9 @@ export function HeroSection() {
 
         {/* Top Meta Line */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex items-center justify-between text-xs text-neutral-400 border-b border-white/10 pb-6"
         >
           <span>ESTADO DE SÃO PAULO, BRASIL</span>
@@ -87,9 +87,9 @@ export function HeroSection() {
         {/* Main Headline */}
         <div className="my-auto py-6 md:py-10 flex flex-col gap-6">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white uppercase">
@@ -105,29 +105,21 @@ export function HeroSection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-md pt-1"
           >
             <p className="text-sm sm:text-base font-light text-neutral-300 leading-relaxed border-l-2 border-red-500 pl-4">
-              Especializado em{" "}
-              <span className="text-red-400 font-semibold underline underline-offset-4 decoration-red-500">
-                Identidade Visual
-              </span>
-              , Branding de Estúdios e{" "}
-              <span className="text-red-400 font-semibold underline underline-offset-4 decoration-red-500">
-                Thumbnails 3D de Alto Impacto
-              </span>{" "}
-              para os maiores criadores e times de Esports do Brasil.
+              Identidade de Marca e <span className="text-red-400 font-semibold">Thumbnails 3D de Alto Impacto</span> para os maiores criadores do Brasil.
             </p>
           </motion.div>
         </div>
 
         {/* Bottom scroll CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
           className="flex items-center justify-between pt-6 border-t border-white/10 text-xs text-neutral-400"
         >

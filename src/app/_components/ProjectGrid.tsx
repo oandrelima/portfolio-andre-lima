@@ -23,7 +23,13 @@ export function ProjectGrid() {
   return (
     <section id="projects" className="py-24 px-6 md:px-12 bg-neutral-950/60 border-t border-white/10 relative">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b border-white/10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-6 border-b border-white/10"
+      >
         <div>
           <div className="flex items-center gap-2 text-xs text-red-500 uppercase tracking-widest mb-2">
             <span>// PROJETOS CONCLUÍDOS</span>
@@ -34,25 +40,25 @@ export function ProjectGrid() {
         </div>
 
         <p className="max-w-md text-xs text-neutral-400 leading-relaxed">
-          Selecione qualquer projeto para visualizar a análise completa de conceito e entregáveis, ou acesse diretamente a publicação oficial no Behance.
+          Estudos de caso e identidades visuais de alta performance.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Projects Asymmetrical Grid */}
+      {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
         {projects?.map((project, idx) => (
           <motion.div
             key={project.id}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: idx * 0.2 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="group relative flex flex-col gap-6"
           >
             {/* Image Container */}
             <div
               onClick={() => setSelectedProject(project)}
-              className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:border-white/30 transition-all duration-500 cursor-pointer shadow-2xl"
+              className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:border-red-500/40 transition-all duration-500 cursor-pointer shadow-2xl group-hover:shadow-[0_0_50px_rgba(226,36,39,0.12)]"
               data-cursor="EXPANDIR"
             >
               <Image
@@ -64,7 +70,7 @@ export function ProjectGrid() {
               />
 
               {/* Hover Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
 
               {/* Top Badges */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 gap-2">
@@ -97,7 +103,7 @@ export function ProjectGrid() {
                   </span>
                 </div>
 
-                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-red-600 group-hover:border-red-500 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-red-600 group-hover:border-red-500 transition-all duration-300">
                   <ArrowUpRight className="w-5 h-5" />
                 </div>
               </div>
@@ -123,18 +129,24 @@ export function ProjectGrid() {
       </div>
 
       {/* Bottom CTA Button */}
-      <div className="mt-16 flex justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="mt-16 flex justify-center"
+      >
         <a
           href="https://www.behance.net/andrelima07"
           target="_blank"
           rel="noreferrer"
-          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-neutral-900 border border-white/20 hover:border-red-500 hover:bg-neutral-800 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 shadow-xl"
+          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-neutral-900/90 border border-white/20 hover:border-red-500 hover:bg-neutral-800 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 shadow-xl backdrop-blur-md"
           data-cursor="BEHANCE"
         >
           <span>VER MAIS PROJETOS NO BEHANCE</span>
           <ExternalLink className="w-4 h-4 text-red-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </a>
-      </div>
+      </motion.div>
 
       {/* Project Modal */}
       <ProjectModal

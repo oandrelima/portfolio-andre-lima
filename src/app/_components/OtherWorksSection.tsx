@@ -71,7 +71,13 @@ export function OtherWorksSection() {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Section Header */}
-      <div className="px-6 md:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="px-6 md:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6"
+      >
         <div>
           <div className="flex items-center gap-2 text-xs text-red-500 uppercase tracking-widest mb-2">
             <Layers className="w-4 h-4 text-red-500" />
@@ -83,9 +89,9 @@ export function OtherWorksSection() {
         </div>
 
         <p className="max-w-md text-xs text-neutral-400 leading-relaxed">
-          Galeria interativa com capas 3D e thumbnails de alta conversão produzidas para diversos canais e projetos do YouTube.
+          Galeria de capas 3D e thumbnails de altíssima conversão.
         </p>
-      </div>
+      </motion.div>
 
       {/* ── 3-ROW CAROUSEL MARQUEE GRID ── */}
       <div className="space-y-4 py-4 marquee-mask">
