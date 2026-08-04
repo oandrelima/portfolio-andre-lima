@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Youtube } from "lucide-react";
+import { useState, useRef } from "react";
+import { Youtube, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { trpc } from "~/utils/trpc";
 
@@ -69,7 +69,7 @@ function ChannelCard({
       href={url}
       target="_blank"
       rel="noreferrer"
-      className="group mx-6 flex flex-col items-center gap-3 shrink-0 w-36 select-none"
+      className="group flex flex-col items-center gap-3 shrink-0 w-40 select-none p-4 rounded-2xl bg-neutral-900/50 border border-white/10 hover:border-red-500/50 hover:bg-neutral-900 transition-all duration-300"
       data-cursor="YOUTUBE"
     >
       {/* Circular Avatar */}
@@ -78,11 +78,11 @@ function ChannelCard({
       </div>
 
       {/* Name & Handle */}
-      <div className="flex flex-col items-center text-center gap-0.5">
-        <span className="text-white font-bold text-sm group-hover:text-red-400 transition-colors leading-tight">
+      <div className="flex flex-col items-center text-center gap-0.5 w-full">
+        <span className="text-white font-bold text-sm group-hover:text-red-400 transition-colors leading-tight truncate max-w-full">
           {name}
         </span>
-        <span className="text-neutral-400 text-xs">{handle}</span>
+        <span className="text-neutral-400 text-xs truncate max-w-full">{handle}</span>
         <span className="text-amber-400 text-xs font-semibold mt-0.5">{subscribers}</span>
       </div>
     </a>
@@ -91,6 +91,19 @@ function ChannelCard({
 
 export function YouTubeMarquee() {
   const { data: channels, isLoading } = trpc.getYouTubeChannels.useQuery();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 320, behavior: "smooth" });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -100,26 +113,19 @@ export function YouTubeMarquee() {
     );
   }
 
-  // Triple the list for a seamless infinite loop
-  const marqueeList = [
-    ...(channels ?? []),
-    ...(channels ?? []),
-    ...(channels ?? []),
-  ];
-
   return (
     <section id="youtube" className="py-24 bg-neutral-950 border-t border-white/10 relative overflow-hidden">
       {/* Glow Effects */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-red-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Section Header */}
+      {/* Section Header with Arrow Navigation Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="px-6 md:px-12 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6"
+        className="px-6 md:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6"
       >
         <div>
           <div className="flex items-center gap-2 text-xs text-red-500 uppercase tracking-widest mb-2">
@@ -131,17 +137,44 @@ export function YouTubeMarquee() {
           </h2>
         </div>
 
-        <p className="max-w-md text-xs text-neutral-400 leading-relaxed">
-          Parcerias com os maiores criadores e pro players do Brasil.
-        </p>
+        <div className="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto">
+          <p className="hidden md:block max-w-xs text-xs text-neutral-400 leading-relaxed">
+            Parcerias com os maiores criadores e pro players do Brasil.
+          </p>
+
+          {/* Navigation Arrows */}
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={scrollLeft}
+              className="p-3 rounded-full bg-neutral-900 border border-white/20 text-white hover:bg-red-600 hover:border-red-500 transition-all hover:scale-110 shadow-lg active:scale-95"
+              title="Anterior"
+              aria-label="Canais Anteriores"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={scrollRight}
+              className="p-3 rounded-full bg-neutral-900 border border-white/20 text-white hover:bg-red-600 hover:border-red-500 transition-all hover:scale-110 shadow-lg active:scale-95"
+              title="Próximo"
+              aria-label="Próximos Canais"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </motion.div>
 
-      {/* INFINITE MARQUEE TICKER */}
-      <div className="relative w-full overflow-hidden py-6 marquee-mask">
-        <div className="flex items-start w-max animate-marquee-slow hover:[animation-play-state:paused] cursor-pointer">
-          {marqueeList.map((channel, index) => (
+      {/* MANUAL SLIDER CAROUSEL */}
+      <div className="px-6 md:px-12">
+        <div
+          ref={scrollRef}
+          className="flex items-center gap-6 overflow-x-auto scroll-smooth py-4 no-scrollbar"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {channels?.map((channel) => (
             <ChannelCard
-              key={`${channel.id}-${index}`}
+              key={channel.id}
               id={channel.id}
               name={channel.name}
               handle={channel.handle}
