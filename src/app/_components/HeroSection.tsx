@@ -74,15 +74,7 @@ export function HeroSection() {
       {/* ── CONTENT ── */}
       <div className="relative z-10 flex flex-col h-full justify-between flex-1 pl-6 md:pl-8">
 
-        {/* Top Meta Line */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex items-center justify-between text-xs text-neutral-400 border-b border-white/10 pb-6"
-        >
-          <span>ESTADO DE SÃO PAULO, BRASIL</span>
-        </motion.div>
+
 
         {/* Main Headline */}
         <div className="my-auto py-6 md:py-10 flex flex-col gap-6">

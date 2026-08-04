@@ -62,15 +62,25 @@ export function Footer() {
             )}
           </div>
 
-          <div className="md:col-span-4 flex items-center md:justify-end gap-4">
+          <div className="md:col-span-4 flex flex-wrap items-center md:justify-end gap-3">
             <a
               href="https://www.behance.net/andrelima07"
               target="_blank"
               rel="noreferrer"
-              className="px-6 py-3.5 rounded-full border border-white/10 hover:border-white/40 bg-neutral-900 text-xs uppercase tracking-widest text-neutral-300 hover:text-white transition-colors flex items-center gap-2"
+              className="px-6 py-3.5 rounded-full border border-white/10 hover:border-red-500 bg-neutral-900 text-xs uppercase tracking-widest text-neutral-300 hover:text-white transition-all hover:scale-105 flex items-center gap-2 shadow-md"
             >
               <span>BEHANCE</span>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <ExternalLink className="w-3.5 h-3.5 text-red-500" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/andr%C3%A9-oliveira-6785aa287/"
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-3.5 rounded-full border border-white/10 hover:border-blue-500 bg-neutral-900 text-xs uppercase tracking-widest text-neutral-300 hover:text-white transition-all hover:scale-105 flex items-center gap-2 shadow-md"
+            >
+              <span>LINKEDIN</span>
+              <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
             </a>
           </div>
         </div>
