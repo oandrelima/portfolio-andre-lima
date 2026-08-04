@@ -1,16 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 md:px-12 flex items-center justify-between bg-black/60 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+      <header
+        className={`fixed top-0 left-0 w-full z-50 px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${
+          scrolled
+            ? "py-4 bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-2xl"
+            : "py-6 bg-transparent border-b border-transparent"
+        }`}
+      >
         {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-3">
           <div className="relative w-8 h-8 flex items-center justify-center bg-white text-black font-black text-xs tracking-tighter rounded-sm transition-transform duration-300 group-hover:rotate-180">
@@ -142,4 +157,3 @@ export function Header() {
     </>
   );
 }
-
