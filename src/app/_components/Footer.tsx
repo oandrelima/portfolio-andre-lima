@@ -5,7 +5,7 @@ import { Copy, Check, ArrowUp, ExternalLink } from "lucide-react";
 
 export function Footer() {
   const [copied, setCopied] = useState(false);
-  const email = "contato@designer.com";
+  const email = "oandreluislima@gmail.com";
 
   const copyEmail = () => {
     navigator.clipboard.writeText(email);

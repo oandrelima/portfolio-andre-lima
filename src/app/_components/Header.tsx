@@ -148,7 +148,7 @@ export function Header() {
 
               <div className="md:text-right">
                 <span className="block text-white mb-2 uppercase">CONTATO DIRETO</span>
-                <p className="text-neutral-200 font-semibold">contato@designer.com</p>
+                <p className="text-neutral-200 font-semibold">oandreluislima@gmail.com</p>
               </div>
             </div>
           </motion.div>
